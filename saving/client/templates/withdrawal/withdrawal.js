@@ -156,6 +156,8 @@ var confirm = function (e, t) {
             // Receivable interest
             var interestCalResult = interestCalWithRate(getLast.performDate, performDate, getLast.principalBal, productDoc.rate);
             var dayNumberResult = interestCalResult.dayNumber;
+            t.$('[name="dayNumber"]').val(dayNumberResult);
+
             var principalResult = getLast.principalBal;
             var interestResult = getLast.interestBal + interestCalResult.interest;
             var totalResult = principalResult + interestResult;
@@ -176,54 +178,82 @@ var confirm = function (e, t) {
                 maturityDate.value = moment(getLast.performDate, 'YYYY-MM-DD').add(yearNumber, 'years').toDate();
                 maturityDate.value = moment(maturityDate.value).format('YYYY-MM-DD');
 
-                if (performDate < maturityDate.value) {
-                    maturityDate.label = 'warning';
-
-                    // Interest rate base on easy
-                    var easyProductId = '001';
-                    var getEasyProduct = Saving.Collection.Product.findOne(easyProductId);
-                    actualRate = getEasyProduct.rate;
-
-                    // change result
-                    interestCalResult = interestCalWithRate(getLast.performDate, performDate, getLast.principalBal, getEasyProduct.rate);
-                    interestResult = getLast.interestBal + interestCalResult.interest;
-                    totalResult = principalResult + interestResult;
-                }
-
-                confirmData = {
-                    dayNumber: dayNumberResult,
-                    principal: accounting.format(principalResult, 2),
-                    interest: accounting.format(interestResult, 2) + ' (Rate: ' + accounting.format(actualRate, 2) + ')',
-                    total: accounting.format(totalResult, 2),
-                    client: clientDoc.khName,
-                    accDate: accountDoc.accDate,
-                    currency: currencyDoc._id,
-                    product: productDoc.name,
-                    rate: accounting.format(productDoc.rate, 2),
-                    maturityDate: maturityDate,
-                    lastActiveDate: getLastNoPerformDate.performDate
-                };
-
                 // Check product to confirm
+                var easyProductId = '001';
+                var getEasyProduct = Saving.Collection.Product.findOne(easyProductId);
+
                 if (s.startsWith(productDoc._id, '1')) {
+                    var penalty = 0;
+                    if (performDate < maturityDate.value) {
+                        maturityDate.label = 'warning';
+
+                        // Cal penalty interest with easy rate
+                        var sumOfInterest = 0;
+                        Saving.Collection.Perform.find(accountId)
+                            .forEach(function (obj) {
+                                sumOfInterest += obj.interestRe;
+                            });
+                        var varianceOfRate = productDoc.rate - getEasyProduct.rate;
+                        penalty = (interestResult + sumOfInterest) * varianceOfRate / productDoc.rate;
+                    }
+
+                    confirmData = {
+                        dayNumber: dayNumberResult,
+                        principal: accounting.format(principalResult, 2),
+                        interest: accounting.format(interestResult, 2) + ' (Rate: ' + accounting.format(actualRate, 2) + ')',
+                        total: accounting.format(totalResult, 2),
+                        penalty: accounting.format(penalty, 2),
+                        client: clientDoc.khName,
+                        accDate: accountDoc.accDate,
+                        currency: currencyDoc._id,
+                        product: productDoc._id + ' | ' + productDoc.name,
+                        rate: accounting.format(productDoc.rate, 2),
+                        maturityDate: maturityDate,
+                        lastActiveDate: getLastNoPerformDate.performDate
+                    };
+
                     alertify.alert('Confirm', renderTemplate(Template.saving_withdrawalConfirmProduct1, confirmData), function () {
                         t.find('[name="principalRe"]').value = principalResult;
                         t.find('[name="interestRe"]').value = interestResult;
 
                         var withdrawalOpt = $('[name="withdrawalConfirmRadio"]:checked').val();
 
-                        console.log(withdrawalOpt);
-
                         if (withdrawalOpt == 'interest') {
                             t.find('[name="amount"]').value = interestResult;
+                            t.find('[name="memo"]').value = '';
                         } else {
                             t.find('[name="amount"]').value = totalResult;
+                            t.find('[name="memo"]').value = 'Penalty: ' + accounting.format(penalty, 2);
                         }
 
                         t.$('[type="submit"]').removeAttr('disabled');
                         t.$('[name="amount"]').attr('readonly', 'readonly');
                     });
-                } else {
+                } else { // product id = 2...
+                    if (performDate < maturityDate.value) {
+                        maturityDate.label = 'warning';
+
+                        // change result
+                        interestCalResult = interestCalWithRate(getLast.performDate, performDate, getLast.principalBal, getEasyProduct.rate);
+                        interestResult = getLast.interestBal + interestCalResult.interest;
+                        totalResult = principalResult + interestResult;
+                        actualRate = getEasyProduct.rate;
+                    }
+
+                    confirmData = {
+                        dayNumber: dayNumberResult,
+                        principal: accounting.format(principalResult, 2),
+                        interest: accounting.format(interestResult, 2) + ' (Rate: ' + accounting.format(actualRate, 2) + ')',
+                        total: accounting.format(totalResult, 2),
+                        client: clientDoc.khName,
+                        accDate: accountDoc.accDate,
+                        currency: currencyDoc._id,
+                        product: productDoc._id + ' | ' + productDoc.name,
+                        rate: accounting.format(productDoc.rate, 2),
+                        maturityDate: maturityDate,
+                        lastActiveDate: getLastNoPerformDate.performDate
+                    };
+
                     alertify.alert('Confirm', renderTemplate(Template.saving_withdrawalConfirmProduct2, confirmData), function () {
                         t.find('[name="principalRe"]').value = principalResult;
                         t.find('[name="interestRe"]').value = interestResult;
@@ -242,7 +272,7 @@ var confirm = function (e, t) {
                     client: clientDoc.khName,
                     accDate: accountDoc.accDate,
                     currency: currencyDoc._id,
-                    product: productDoc.name,
+                    product: productDoc._id + ' | ' + productDoc.name,
                     rate: accounting.format(productDoc.rate, 2),
                     lastActiveDate: getLastNoPerformDate.performDate
                 };

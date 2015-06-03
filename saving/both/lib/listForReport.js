@@ -29,7 +29,10 @@ Saving.ListForReport = {
 
         Saving.Collection.Product.find({}, {sort: {_id: 1}})
             .forEach(function (obj) {
-                list.push({label: obj._id + ' | ' + obj.name + ' -> ' + obj.rate, value: obj._id})
+                list.push({
+                    label: obj._id + ' | ' + obj.name + ' [' + obj.rate + ']',
+                    value: obj._id
+                })
             });
 
         return list;

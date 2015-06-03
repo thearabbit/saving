@@ -67,6 +67,11 @@ Saving.Schema.Perform = new SimpleSchema({
         type: String,
         label: "Account ID"
     },
+    memo: {
+        type: String,
+        label: "Memo",
+        optional: true
+    },
     cpanel_branchId: {
         type: String
     }

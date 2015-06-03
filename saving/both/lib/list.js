@@ -41,7 +41,10 @@ Saving.List = {
 
         Saving.Collection.Product.find({}, {sort: {_id: 1}})
             .forEach(function (obj) {
-                list.push({label: obj._id + ' | ' + obj.name + ' -> ' + obj.rate, value: obj._id})
+                list.push({
+                    label: obj._id + ' | ' + obj.name + ' [' + obj.rate + ']',
+                    value: obj._id
+                })
             });
 
         return list;
@@ -68,7 +71,10 @@ Saving.List = {
         var selector = {cpanel_branchId: Session.get('currentBranch')};
         Saving.Collection.Staff.find(selector, {sort: {_id: 1}})
             .forEach(function (obj) {
-                list.push({label: obj.name + ' (' + obj.gender + ')', value: obj._id})
+                list.push({
+                    label: obj._id + ' | ' + obj.name + ' (' + obj.gender + ')',
+                    value: obj._id
+                })
             });
 
         return list;
@@ -80,7 +86,10 @@ Saving.List = {
         var selector = {cpanel_branchId: Session.get('currentBranch')};
         Saving.Collection.Client.find(selector, {sort: {_id: 1}})
             .forEach(function (obj) {
-                list.push({label: obj.khName + ' (' + obj.gender + ')', value: obj._id})
+                list.push({
+                    label: obj._id + ' | ' + obj.khName + ' (' + obj.gender + ')',
+                    value: obj._id
+                })
             });
 
         return list;
@@ -93,7 +102,10 @@ Saving.List = {
         Saving.Collection.Account.find(selector, {sort: {_id: 1}})
             .forEach(function (obj) {
                 var getClient = Saving.Collection.Client.findOne(obj.clientId);
-                list.push({label: obj._id + ' | ' + getClient.khName, value: obj._id})
+                list.push({
+                    label: obj._id + ' | ' + getClient.khName + ' (' + getClient.gender + ')',
+                    value: obj._id
+                })
             });
 
         return list;
@@ -112,7 +124,10 @@ Saving.List = {
         Saving.Collection.Account.find(selector, {sort: {_id: 1}})
             .forEach(function (obj) {
                 var getClient = Saving.Collection.Client.findOne(obj.clientId);
-                list.push({label: obj._id + ' | ' + getClient.khName, value: obj._id})
+                list.push({
+                    label: obj._id + ' | ' + getClient.khName + ' (' + getClient.gender + ')',
+                    value: obj._id
+                })
             });
 
         return list;
@@ -131,7 +146,10 @@ Saving.List = {
                     // Check status = F
                     if (getLast.status != 'F') {
                         var getClient = Saving.Collection.Client.findOne(obj.clientId);
-                        list.push({label: obj._id + ' | ' + getClient.khName, value: obj._id})
+                        list.push({
+                            label: obj._id + ' | ' + getClient.khName + ' (' + getClient.gender + ')',
+                            value: obj._id
+                        })
                     }
                 }
             });
