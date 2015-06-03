@@ -1,0 +1,23 @@
+Cpanel.TabularTable.Exchange = new Tabular.Table({
+    name: "cpanelExchangeList",
+    collection: Cpanel.Collection.Exchange,
+    columns: [
+        {data: "dateTime", title: "Date"},
+        {data: "base", title: "Base Currency"},
+        {
+            data: "rates",
+            title: "Rates",
+            render: function (val, type, doc) {
+                return JSON.stringify(val);
+            }
+        },
+        {
+            title: '<i class="fa fa-bars"></i>',
+            tmpl: Meteor.isClient && Template.cpanel_exchangeAction
+        }
+    ],
+    order: [['0', 'desc']],
+    columnDefs: [
+        {"width": "12px", "targets": 3}
+    ]
+});
