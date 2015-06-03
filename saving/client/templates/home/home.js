@@ -1,1 +1,0 @@
-Template.saving_home.helpers({});
