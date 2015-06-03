@@ -1,0 +1,42 @@
+<template name="saving_navbar">
+    <ul class="nav navbar-nav">
+        <li class="{{isActiveRoute regex='saving.home'}}"><a href="{{pathFor 'saving.home'}}">Home</a></li>
+        <li class="{{isActiveRoute regex='saving.client'}}"><a href="{{pathFor 'saving.client'}}">Client</a></li>
+        <li class="{{isActiveRoute regex='saving.account'}}"><a href="{{pathFor 'saving.account'}}">Account</a></li>
+        <li class="{{isActiveRoute regex='saving.deposit$'}}"><a href="{{pathFor 'saving.deposit'}}">Deposit</a></li>
+        <li class="{{isActiveRoute regex='saving.withdrawal$'}}"><a href="{{pathFor 'saving.withdrawal'}}">Withdrawal</a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Reports <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li class="{{isActiveRoute regex='saving.depositReport'}}">
+                    <a href="{{pathFor 'saving.depositReport'}}">Deposit</a>
+                </li>
+                <li class="{{isActiveRoute regex='saving.withdrawalReport'}}">
+                    <a href="{{pathFor 'saving.withdrawalReport'}}">Withdrawal</a>
+                </li>
+                <li class="{{isActiveRoute regex='saving.outstandingReport'}}">
+                    <a href="{{pathFor 'saving.outstandingReport'}}">Outstanding</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                Settings <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li class="{{isActiveRoute regex='cpanel.exchange'}}">
+                    <a href="{{pathFor 'cpanel.exchange'}}">Exchange</a>
+                </li>
+                <li class="{{isActiveRoute regex='saving.staff'}}">
+                    <a href="{{pathFor 'saving.staff'}}">Staff</a>
+                </li>
+                <li class="{{isActiveRoute regex='saving.product'}}">
+                    <a href="{{pathFor 'saving.product'}}">Product</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>
