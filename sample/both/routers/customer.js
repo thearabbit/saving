@@ -4,6 +4,6 @@ Router.route('sample/customer', function () {
 
 }, {
     name: 'sample.customer',
-    header: {title: 'customer', sub: '', icon: 'user-plus'},
+    header: {title: 'customer', sub: '', icon: 'list'},
     title: "Customer"
 });
