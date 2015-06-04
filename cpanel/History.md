@@ -3,6 +3,11 @@ Meteor boilerplate for Rabbit Training Center.
 
 ## v.Next
 - add sample events track on report
+- create backup/restore package
+- create sample report on excel file
+
+## v0.3.6, 2014-06-04
+- fix add address on sample module
 
 ## v0.3.5, 2014-06-03
 - fix sample report
