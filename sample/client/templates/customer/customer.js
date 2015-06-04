@@ -4,9 +4,7 @@ var updateTpl = Template.sample_customerUpdate;
 var showTpl = Template.sample_customerShow;
 var addressAddonTpl = Template.sample_addressAddon;
 
-/**
- * Index
- */
+// Index
 indexTpl.onCreated(function () {
     // Create new  alertify
     createNewAlertify(["customer", "addressAddon"]);
@@ -63,9 +61,7 @@ indexTpl.onDestroyed(function () {
     //
 });
 
-/**
- * Insert
- */
+// Insert
 insertTpl.onRendered(function () {
     datePicker();
 });
@@ -76,9 +72,7 @@ insertTpl.events({
     }
 });
 
-/**
- * Update
- */
+// Update
 updateTpl.onRendered(function () {
     datePicker();
 });
@@ -89,9 +83,7 @@ updateTpl.events({
     }
 });
 
-/**
- * Hook
- */
+// Hook
 AutoForm.hooks({
     // Customer
     sample_customerInsert: {
@@ -137,9 +129,7 @@ AutoForm.hooks({
     }
 });
 
-/**
- * Config date picker
- */
+// Config date picker
 var datePicker = function () {
     var dob = $('[name="dob"]');
     DateTimePicker.date(dob);
