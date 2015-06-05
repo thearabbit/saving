@@ -93,9 +93,9 @@ Saving.Schema.Account = new SimpleSchema({
     'inheritor.$.gender': {
         type: String,
         autoform: {
-            type: "select2",
+            type: "select",
             options: function () {
-                return Saving.List.gender();
+                return Saving.List.genderNoSelectOne();
             }
         }
     },

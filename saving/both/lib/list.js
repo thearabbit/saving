@@ -10,6 +10,13 @@ Saving.List = {
 
         return list;
     },
+    genderNoSelectOne: function () {
+        var list = [];
+        list.push({label: 'Male', value: 'M'});
+        list.push({label: 'Female', value: 'F'});
+
+        return list;
+    },
     idType: function () {
         var list = [];
         list.push({label: "(Select One)", value: ""});
