@@ -6,6 +6,13 @@ Meteor boilerplate for Rabbit Training Center.
 - create backup/restore package
 - create sample report on excel file
 
+## v0.4.0, 2014-06-05
+- upgrade packages
+
+## v0.3.9, 2014-06-05
+- fix tabular
+
+
 ## v0.3.8, 2014-06-04
 - fix sample tabular (column with)
 

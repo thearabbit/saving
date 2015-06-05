@@ -1,3 +1,4 @@
+// Address
 Meteor.startup(function () {
     if (Sample.Collection.Address.find().count() == 0) {
         Sample.Collection.Address.insert(

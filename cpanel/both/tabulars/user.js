@@ -4,7 +4,14 @@ Cpanel.TabularTable.User = new Tabular.Table({
     selector: function (userId) {
         return {username: {$ne: 'super'}}
     },
+    pagingType: "full_numbers",
+    autoWidth: false,
+    columnDefs: [
+        {"width": "12px", "targets": 0}
+    ],
+    order: [['1', 'desc']],
     columns: [
+        {title: '<i class="fa fa-bars"></i>', tmpl: Meteor.isClient && Template.cpanel_userAction},
         {data: "username", title: "User Name"},
         {
             data: "emails",
@@ -46,14 +53,6 @@ Cpanel.TabularTable.User = new Tabular.Table({
                     return '<span class="label label-default">offline</span>';
                 }
             }
-        },
-        {
-            title: '<i class="fa fa-bars"></i>',
-            tmpl: Meteor.isClient && Template.cpanel_userAction
         }
-    ],
-    order: [['0', 'desc']],
-    columnDefs: [
-        {"width": "12px", "targets": 5}
     ]
 });

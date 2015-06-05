@@ -1,8 +1,8 @@
 <template name="sample_navbar">
     <ul class="nav navbar-nav">
-        <li class="{{isActiveRoute regex='sample.home'}}"><a href="{{pathFor 'sample.home'}}">Home</a></li>
-        <li class="{{isActiveRoute regex='sample.customer'}}"><a href="{{pathFor 'sample.customer'}}">Customer</a></li>
-        <li class="{{isActiveRoute regex='cpanel.exchange'}}">
+        <li class="{{isActiveRoute name='sample.home'}}"><a href="{{pathFor 'sample.home'}}">Home</a></li>
+        <li class="{{isActiveRoute name='sample.customer'}}"><a href="{{pathFor 'sample.customer'}}">Customer</a></li>
+        <li class="{{isActiveRoute name='cpanel.exchange'}}">
             <a href="{{pathFor 'cpanel.exchange'}}">Exchange</a>
         </li>
         <li class="dropdown">
@@ -10,7 +10,7 @@
                 Reports <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-                <li class="{{isActiveRoute regex='sample.myCustomerReport'}}"><a
+                <li class="{{isActiveRoute name='sample.myCustomerReport'}}"><a
                         href="{{pathFor 'sample.myCustomerReport'}}">Sample</a>
                 </li>
             </ul>

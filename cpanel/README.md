@@ -30,6 +30,7 @@ Meteor boilerplate for Rabbit Training Center.
             |_methods
             |_startup
             |_subscriptions
+        |_compatibility // other external js libraries
         |_css
         |_templates
             |_layout    // menu bar
@@ -38,12 +39,12 @@ Meteor boilerplate for Rabbit Training Center.
                 myTemplate.html
                 myTemplate.js
             |_reports
-                |_myReport
-                    myReport.html
-                    myReprot.js
+                myReport.html
+                myReprot.js
     |_server
         |_app   // other file or libraries load first on server
-            security.js
+            security.js // create security method like config in Module
+        |-collectionsHook  // create hook to tract events
         |_methods
         |_publications
             publications.js
@@ -55,9 +56,7 @@ Meteor boilerplate for Rabbit Training Center.
 
 - Config new module and set roles in `rabbit/both/lib/config/module.js`
 ```js
-/**
- * Module
- */
+// Module
 Module = typeof Module === 'undefined' ? {} : Module;
 Meteor.isClient && Template.registerHelper('Module', Module);
 
@@ -75,9 +74,7 @@ Module.Rabbit = {
 
 - Config namespace in `rabbit/both/lib/config/namespace.js` to use collection, schema, tabular and other libraries
 ```js
-/**
- * Namespace
- */
+// Namespace
 Rabbit = {};
 
 Meteor.isClient && Template.registerHelper('Rabbit', Rabbit);
@@ -94,9 +91,7 @@ Rabbit.TabularTable = {};
 
 - Create security method in `rabbit/server/app/security.js`
 ```js
-/**
- * Admin
- */
+// Admin
 Security.defineMethod("rabbitIfAdmin", {
     fetch: [],
     transform: null,
@@ -105,9 +100,7 @@ Security.defineMethod("rabbitIfAdmin", {
     }
 });
 
-/**
- * General
- */
+// General
 Security.defineMethod("rabbitIfGeneral", {
     fetch: [],
     transform: null,
@@ -116,9 +109,7 @@ Security.defineMethod("rabbitIfGeneral", {
     }
 });
 
-/**
- * Reporter
- */
+// Reporter
 Security.defineMethod("rabbitIfReporter", {
     fetch: [],
     transform: null,
@@ -138,31 +129,38 @@ Security.defineMethod("rabbitIfReporter", {
 
 - Create list view of select options in `rabbit/both/lib/methods/list.js`
 ```js
-/**
- * List
- */
+// List
 Rabbit.List = {
-    gender: function (selectOne) {
+    gender: function () {
         var list = [];
-        if (!_.isEqual(selectOne, false)) {
-            list.push({label: "(Select One)", value: ""});
-        }
+        list.push({label: "(Select One)", value: ""});
 
         list.push({label: 'Male', value: 'M'});
         list.push({label: 'Female', value: 'F'});
 
         return list;
     },
-    address: function (selectOne) {
+    address: function () {
         var list = [];
-        if (!_.isEqual(selectOne, false)) {
-            list.push({label: "(Select One)", value: ""});
-        }
+        list.push({label: "(Select One)", value: ""});
 
         Rabbit.Collection.Address.find()
             .forEach(function (obj) {
                 list.push({label: obj._id + ' : ' + obj.name, value: obj._id});
             });
+
+        return list;
+    }
+};
+
+// List for report
+Rabbit.ListForReport = {
+    type: function () {
+        var list = [];
+        list.push({label: "(Select All)", value: ""});
+
+        list.push({label: 'A', value: 'A'});
+        list.push({label: 'B', value: 'B'});
 
         return list;
     }
@@ -223,6 +221,9 @@ Rabbit.List = {
 - theara:fa-helpers
 - reactive-var
 - numeral:numeral
+- theara:events
+- xamfoo:reactive-obj
+- frozeman:template-var
 
 ## Internal libraries
 - DateTimePicker in `rabbit/client/app/methods`
@@ -311,7 +312,7 @@ bootbox.dialog({
 - Alertify in `rabbit/client/app/methods`
 ```js
 // How to use custom
-createNewAlertify("customer"); // Call in template create/render
+createNewAlertify("customer"); // Call in template create
 
 alertify.customer("<i class='fa fa-plus'></i> Customer", renderTemplate(Template.sample_customerInsert))
     .maximize(); // auto full screen
@@ -355,7 +356,8 @@ var currentDate = ReactiveMethod.call("currentDate"); // 'YYYY-MM-DD H:mm:ss'
 - Session: `currentModule` and `currentBranch`
 - Collections:
     - Setting()
-    - User()
+    - Company()
     - Branch()
     - Currency()
+    - User()
     - Exchange()

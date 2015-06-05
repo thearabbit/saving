@@ -1,6 +1,4 @@
-/**
- * Module
- */
+// Module
 Module = typeof Module === 'undefined' ? {} : Module;
 Meteor.isClient && Template.registerHelper('Module', Module);
 

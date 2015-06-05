@@ -1,7 +1,14 @@
 Cpanel.TabularTable.Branch = new Tabular.Table({
     name: "cpanelBranchList",
     collection: Cpanel.Collection.Branch,
+    pagingType: "full_numbers",
+    autoWidth: false,
+    columnDefs: [
+        {"width": "12px", "targets": 0}
+    ],
+    order: [['1', 'desc']],
     columns: [
+        {title: '<i class="fa fa-bars"></i>', tmpl: Meteor.isClient && Template.cpanel_branchAction},
         {data: "_id", title: "ID"},
         {data: "khName", title: "Kh Name"},
         {data: "khShortName", title: "Kh Short Name"},
@@ -10,14 +17,6 @@ Cpanel.TabularTable.Branch = new Tabular.Table({
         {data: "khAddress", title: "Kh Address"},
         {data: "enAddress", title: "En Address"},
         {data: "telephone", title: "Telephone"},
-        {data: "email", title: "Email"},
-        {
-            title: '<i class="fa fa-bars"></i>',
-            tmpl: Meteor.isClient && Template.cpanel_branchAction
-        }
-    ],
-    order: [['0', 'desc']],
-    columnDefs: [
-        {"width": "12px", "targets": 9}
+        {data: "email", title: "Email"}
     ]
 });

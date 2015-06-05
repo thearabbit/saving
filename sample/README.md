@@ -1,4 +1,4 @@
 # Sample
-Sample module for rateor
+Sample System
 
 ## Usage

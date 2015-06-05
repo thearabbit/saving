@@ -1,6 +1,4 @@
-/**
- * Customer
- */
+// Customer
 var module = 'Sample';
 
 Sample.Collection.Customer.after.insert(function (userId, doc) {

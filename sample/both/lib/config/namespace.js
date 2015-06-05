@@ -1,6 +1,4 @@
-/**
- * Namespace
- */
+// Namespace
 Sample = {};
 
 Meteor.isClient && Template.registerHelper('Sample', Sample);

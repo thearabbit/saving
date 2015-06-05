@@ -1,12 +1,12 @@
 <template name="cpanel_navbar">
     <ul class="nav navbar-nav">
-        <li class="{{isActiveRoute regex='cpanel.home'}}">
+        <li class="{{isActiveRoute name='cpanel.home'}}">
             <a href="{{pathFor 'cpanel.home'}}">Home</a>
         </li>
-        <li class="{{isActiveRoute regex='cpanel.exchange'}}">
+        <li class="{{isActiveRoute name='cpanel.exchange'}}">
             <a href="{{pathFor 'cpanel.exchange'}}">Exchange</a>
         </li>
-        <li class="{{isActiveRoute regex='capnel.eventReport'}}">
+        <li class="{{isActiveRoute name='capnel.eventReport'}}">
             <a href="{{pathFor 'capnel.eventReport'}}">Event Report</a>
         </li>
         <li class="dropdown">
@@ -14,16 +14,16 @@
                 Setting <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-                <li class="{{isActiveRoute regex='cpanel.branch'}}">
+                <li class="{{isActiveRoute name='cpanel.branch'}}">
                     <a href="{{pathFor 'cpanel.branch'}}">Branch</a>
                 </li>
-                <li class="{{isActiveRoute regex='cpanel.company'}}">
+                <li class="{{isActiveRoute name='cpanel.company'}}">
                     <a href="{{pathFor 'cpanel.company'}}">Company</a>
                 </li>
-                <li class="{{isActiveRoute regex='cpanel.user'}}">
+                <li class="{{isActiveRoute name='cpanel.user'}}">
                     <a href="{{pathFor 'cpanel.user'}}">User</a>
                 </li>
-                <li class="{{isActiveRoute regex='cpanel.setting'}}">
+                <li class="{{isActiveRoute name='cpanel.setting'}}">
                     <a href="{{pathFor 'cpanel.setting'}}">Setting</a>
                 </li>
             </ul>
