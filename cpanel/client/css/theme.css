@@ -116,7 +116,7 @@ code {
 }
 
 /* Meteor status */
-.meteor-status.meteor-status-styled {
+.meteor-status{
     color: #8a6d3b;
     background-color: #fcf8e3;
     border-color: #faebcc;
