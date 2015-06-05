@@ -33,13 +33,13 @@ indexTpl.events({
             .maximize();
     },
     'click .remove': function (e, t) {
-        var id = this._id;
+        var self = this;
 
         alertify.confirm(
             fa("remove", "Customer"),
-            "Are you sure to delete [" + id + "]?",
+            "Are you sure to delete [" + self._id + "]?",
             function () {
-                Sample.Collection.Customer.remove(id, function (error) {
+                Sample.Collection.Customer.remove(self._id, function (error) {
                     if (error) {
                         alertify.error(error.message);
                     } else {
