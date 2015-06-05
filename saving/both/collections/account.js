@@ -93,7 +93,7 @@ Saving.Schema.Account = new SimpleSchema({
     'inheritor.$.gender': {
         type: String,
         autoform: {
-            type: "select",
+            type: "select2",
             options: function () {
                 return Saving.List.gender();
             }
