@@ -1,9 +1,12 @@
-Template.sample_myCustomerReport.onRendered(function () {
+var reportTpl = Template.sample_myCustomerReport,
+    generateTpl = Template.sample_myCustomerReportGen;
+
+reportTpl.onRendered(function () {
     var name = $('[name="date"]');
     DateTimePicker.dateRange(name);
 });
 
-Template.sample_myCustomerReportGen.helpers({
+generateTpl.helpers({
     title: function () {
         var self = this;
 

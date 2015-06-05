@@ -1,8 +1,8 @@
-var indexTpl = Template.sample_customer;
-var insertTpl = Template.sample_customerInsert;
-var updateTpl = Template.sample_customerUpdate;
-var showTpl = Template.sample_customerShow;
-var addressAddonTpl = Template.sample_addressAddon;
+var indexTpl = Template.sample_customer,
+    insertTpl = Template.sample_customerInsert,
+    updateTpl = Template.sample_customerUpdate,
+    showTpl = Template.sample_customerShow,
+    addressAddonTpl = Template.sample_addressAddon;
 
 // Index
 indexTpl.onCreated(function () {
