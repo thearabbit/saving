@@ -1,4 +1,8 @@
 // Collection
+Images = new FS.Collection("images", {
+    stores: [new FS.Store.GridFS("images", {})]
+});
+
 Saving.Collection.Client = new Mongo.Collection("saving_client");
 
 // Schema
@@ -83,15 +87,26 @@ Saving.Schema.Client = new SimpleSchema({
         max: 100,
         optional: true
     },
-    occupation: {
+    //occupation: {
+    //    type: String,
+    //    label: "Occupation",
+    //    max: 200
+    //},
+    //occupationAddress: {
+    //    type: String,
+    //    label: "Occupation Address",
+    //    max: 500
+    //},
+    photo: {
         type: String,
-        label: "Occupation",
-        max: 200
-    },
-    occupationAddress: {
-        type: String,
-        label: "Occupation Address",
-        max: 500
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/*'
+            }
+        },
+        optional: true
     },
     cpanel_branchId: {
         type: String,

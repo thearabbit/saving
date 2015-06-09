@@ -16,6 +16,18 @@ Saving.TabularTable.Client = new Tabular.Table({
         {data: "idType", title: "ID Type"},
         {data: "idNumber", title: "ID Number"},
         {data: "address", title: "Address"},
-        {data: "telephone", title: "Telephone"}
+        {data: "telephone", title: "Telephone"},
+        {
+            data: "photo",
+            title: "Photo",
+            render: function (val, type, doc) {
+                if (_.isUndefined(val)) {
+                    return null;
+                } else {
+                    var img = Images.findOne(val);
+                    return '<img src="' + img.url() + '" class="img-circle" width="45px" height="45px">';
+                }
+            }
+        }
     ]
 });

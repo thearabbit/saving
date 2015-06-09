@@ -44,6 +44,7 @@ Template.saving_client.events({
     },
     'click .show': function (e, t) {
         var data = Saving.Collection.Client.findOne({_id: this._id});
+        data.photoUrl = Images.findOne(data.photo).url;
         alertify.alert(fa("eye", "Client"), renderTemplate(Template.saving_clientShow, data));
     }
 });

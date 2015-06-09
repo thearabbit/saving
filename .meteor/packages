@@ -60,3 +60,6 @@ numeral:numeral
 theara:events
 xamfoo:reactive-obj
 frozeman:template-var
+cfs:standard-packages
+cfs:gridfs
+yogiben:autoform-file
