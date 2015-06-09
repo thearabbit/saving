@@ -30,6 +30,7 @@
                 {{> afQuickField name='address'}}
                 {{> afQuickField name='telephone'}}
                 {{> afQuickField name='email'}}
+                {{> afQuickField name="photo"}}
             </div>
         </div>
 
@@ -53,6 +54,7 @@
                 {{> afQuickField name='address'}}
                 {{> afQuickField name='telephone'}}
                 {{> afQuickField name='email'}}
+                {{> afQuickField name="photo"}}
             </div>
         </div>
 
@@ -81,5 +83,7 @@
         <dd>{{telephone}}</dd>
         <dt>Email</dt>
         <dd>{{email}}</dd>
+        <dt>Photo</dt>
+        <dd><img src="{{photoUrl}}" class="img-circle" width="45px" height="45px"></dd>
     </dl>
 </template>

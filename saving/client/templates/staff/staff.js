@@ -44,6 +44,12 @@ Template.saving_staff.events({
     },
     'click .show': function () {
         var data = Saving.Collection.Staff.findOne({_id: this._id});
+        data.photoUrl = null;
+
+        if (!_.isUndefined(data.photo)) {
+            data.photoUrl = Images.findOne(data.photo).url();
+        }
+
         alertify.alert(fa("eye", "Staff"), renderTemplate(Template.saving_staffShow, data));
     }
 });

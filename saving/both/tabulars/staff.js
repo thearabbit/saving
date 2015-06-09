@@ -14,6 +14,19 @@ Saving.TabularTable.Staff = new Tabular.Table({
         {data: "dob", title: "Date of Birth"},
         {data: "position", title: "Position"},
         {data: "address", title: "Address"},
-        {data: "telephone", title: "Telephone"}
+        {data: "telephone", title: "Telephone"},
+        {
+            data: "photo",
+            title: "Photo",
+            render: function (val, type, doc) {
+                if (_.isUndefined(val)) {
+                    return null;
+                } else {
+                    var img = Images.findOne(val);
+                    return '<img src="' + img.url() + '" class="img-circle" width="45px" height="45px">';
+                }
+            }
+        }
+
     ]
 });

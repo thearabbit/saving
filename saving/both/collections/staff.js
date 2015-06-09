@@ -50,6 +50,17 @@ Saving.Schema.Staff = new SimpleSchema({
         max: 100,
         optional: true
     },
+    photo: {
+        type: String,
+        autoform: {
+            afFieldInput: {
+                type: 'fileUpload',
+                collection: 'Images',
+                accept: 'image/*'
+            }
+        },
+        optional: true
+    },
     cpanel_branchId: {
         type: String
     }

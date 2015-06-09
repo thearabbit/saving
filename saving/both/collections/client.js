@@ -1,8 +1,4 @@
 // Collection
-Images = new FS.Collection("images", {
-    stores: [new FS.Store.GridFS("images", {})]
-});
-
 Saving.Collection.Client = new Mongo.Collection("saving_client");
 
 // Schema
